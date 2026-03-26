@@ -4,7 +4,6 @@ from esphome.components import sensor
 from esphome.const import (
     CONF_ID,
     STATE_CLASS_MEASUREMENT,
-    UNIT_METER_PER_SECOND,
     ICON_WEATHER_WINDY,
 )
 
@@ -23,13 +22,13 @@ CONF_SPEED_FACTOR = "speed_factor"
 CONFIG_SCHEMA = cv.Schema({
     cv.GenerateID(): cv.declare_id(AnemometerULPComponent),
     cv.Optional(CONF_SUM): sensor.sensor_schema(
-        unit_of_measurement=UNIT_METER_PER_SECOND,
+        unit_of_measurement="m/s",
         icon=ICON_WEATHER_WINDY,
         accuracy_decimals=2,
         state_class=STATE_CLASS_MEASUREMENT,
     ),
     cv.Optional(CONF_MAX_VALUE): sensor.sensor_schema(
-        unit_of_measurement=UNIT_METER_PER_SECOND,
+        unit_of_measurement="m/s",
         icon=ICON_WEATHER_WINDY,
         accuracy_decimals=2,
         state_class=STATE_CLASS_MEASUREMENT,
