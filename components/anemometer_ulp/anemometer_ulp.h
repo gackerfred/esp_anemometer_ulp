@@ -3,6 +3,7 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esp_sleep.h"
 #include "ulp_lp_core.h"
+#include "ulp_anemometer_bin.h"
 
 // Embedded by board_build.embed_files — symbol derived from filename only
 extern const uint8_t _binary_ulp_anemometer_bin_start[];
@@ -41,13 +42,7 @@ class AnemometerULPComponent : public PollingComponent {
   float speed_factor_{1.0f};
 
   void load_ulp_() {
-    size_t size = _binary_ulp_anemometer_bin_end - _binary_ulp_anemometer_bin_start;
-    ESP_ERROR_CHECK(ulp_lp_core_load_binary(_binary_ulp_anemometer_bin_start, size));
-    ulp_lp_core_cfg_t cfg = {
-        .wakeup_source = ULP_LP_CORE_WAKEUP_SOURCE_LP_TIMER,
-        .lp_timer_sleep_duration_us = 10000,
-    };
-    ESP_ERROR_CHECK(ulp_lp_core_run(&cfg));
+    ESP_ERROR_CHECK(ulp_lp_core_load_binary(ulp_main_bin, ulp_main_bin_len));
   }
 };
 
