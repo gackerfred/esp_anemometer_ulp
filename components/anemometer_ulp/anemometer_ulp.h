@@ -4,11 +4,11 @@
 #include "esp_sleep.h"
 #include "ulp_lp_core.h"
 
-// Symbols exported by ulp_binary.S
+// Embedded by board_build.embed_files — symbol derived from filename only
 extern const uint8_t _binary_ulp_anemometer_bin_start[];
 extern const uint8_t _binary_ulp_anemometer_bin_end[];
 
-// RTC memory variables from ULP (ulp_ prefix added by IDF build)
+// RTC memory variables from ULP program (ulp_ prefix auto-added by IDF)
 extern uint32_t ulp_sum;
 extern uint32_t ulp_max_value;
 
@@ -31,7 +31,7 @@ class AnemometerULPComponent : public PollingComponent {
   }
 
   void update() override {
-    if (sum_sensor_)  sum_sensor_->publish_state(ulp_sum \ 120.0f * speed_factor_);
+    if (sum_sensor_)  sum_sensor_->publish_state(ulp_sum / 120.0f * speed_factor_);
     if (max_sensor_)  max_sensor_->publish_state(ulp_max_value * speed_factor_);
   }
 
