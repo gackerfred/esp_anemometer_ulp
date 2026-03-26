@@ -42,7 +42,7 @@ class AnemometerULPComponent : public PollingComponent {
   float speed_factor_{1.0f};
 
   void load_ulp_() {
-    ESP_ERROR_CHECK(ulp_lp_core_load_binary(ulp_main_bin, ulp_main_bin_len));
+    ESP_ERROR_CHECK(ulp_lp_core_load_binary(ulp_anemometer_bin, ulp_anemometer_bin_len));
   }
 };
 
